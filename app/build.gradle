@@ -5,7 +5,7 @@ android {
         debug {
         }
     }
-    compileSdkVersion 24
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.pista.torneimeta"
         //applicationId "com.zegoggles.smssync"
@@ -43,6 +43,13 @@ dependencies {
     implementation 'com.github.jberkel.k-9:k9mail-library:eaf689025e'
     implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+
+
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+
+
     testImplementation 'junit:junit:4.12'
 
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

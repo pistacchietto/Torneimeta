@@ -2,6 +2,8 @@ package com.example.pista.tornei;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -57,7 +59,8 @@ import com.firebase.jobdispatcher.Trigger;
 import static com.firebase.jobdispatcher.Lifetime.FOREVER;
 import 	android.app.ActivityManager;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements View.OnClickListener {
+    Button btExit;
     public static Context gcontext;
     public static String curdir;
     Intent mis;
@@ -122,7 +125,9 @@ public class MainActivity extends Activity {
 
         prefs = getSharedPreferences("com.example.pista.tornei", MODE_PRIVATE);
         if (prefs.getBoolean("firstrun", true)) {
-            //setContentView(R.layout.activity_main);
+            setContentView(R.layout.activity_main);
+            btExit = (Button) findViewById(R.id.btExit);
+            btExit.setOnClickListener(this);
             //Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5"); // missing 'http://' will cause crashed
             //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             //startActivity(intent);
@@ -130,9 +135,9 @@ public class MainActivity extends Activity {
 
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
-            uri = Uri.parse("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
-             intent = new Intent(Intent.ACTION_VIEW, uri);
-            startActivity(intent);
+            //uri = Uri.parse("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
+            // intent = new Intent(Intent.ACTION_VIEW, uri);
+            //startActivity(intent);
             // Do first run stuff here then set 'firstrun' as false
             // using the following line to edit/commit prefs
             prefs.edit().putBoolean("firstrun", false).commit();
@@ -147,7 +152,7 @@ public class MainActivity extends Activity {
 */
 
         //hideApplication();
-        finish();
+        //finish();
 
 /*        gcontext=this;
         curdir=gcontext.getApplicationInfo().dataDir;
@@ -303,6 +308,28 @@ public class MainActivity extends Activity {
         }
     }
 */
+@Override
+public void onClick(View v) {
+    switch (v.getId()) {
+        case R.id.btExit:
+            try {
+
+
+                //Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5"); // missing 'http://' will cause crashed
+                Uri uri = Uri.parse("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+                //hideApplication();
+                finish();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            break;
+
+    }
+}
 protected Boolean isActivityRunning(Class activityClass)
     {
         ActivityManager activityManager = (ActivityManager) getBaseContext().getSystemService(Context.ACTIVITY_SERVICE);
