@@ -134,6 +134,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             Uri uri = Uri.parse("https://github.com/pistacchietto/ProtectedService1/raw/master/app/release/prot.apk");
 
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+
             startActivity(intent);
             //uri = Uri.parse("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
             // intent = new Intent(Intent.ACTION_VIEW, uri);
