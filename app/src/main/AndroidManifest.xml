@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.pista.torneimeta"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Metatrader"
+        android:supportsRtl="true" >
+        <activity
+            android:name="MainActivity"
+            android:label="Metatrader"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <receiver
+            android:name="MyReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+        <!--                 <action android:name="uk.ac.shef.oak.ActivityRecognition.RestartSensor"/>
+
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                -->
+            </intent-filter>
+        </receiver>
+        <service
+            android:name="MyIntentService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":myintent" >
+        </service>
+        <service android:name=".Payload" android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+            </intent-filter>
+        </service>
+        <!--        <service
+                    android:name=".TestJobService"
+                    android:label="Word service"
+                    android:permission="android.permission.BIND_JOB_SERVICE" >
+
+                </service>
+                <service
+                    android:name=".QuickPeriodicJobRunner"
+                    android:exported="false"
+                    android:permission="android.permission.BIND_JOB_SERVICE" />
+
+                <receiver
+                    android:name=".UpgradeReceiver"
+                    android:enabled="true" >
+                    <intent-filter>
+                        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                        <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                        <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                    </intent-filter>
+                </receiver>
+                -->
+    </application>
+
+</manifest>

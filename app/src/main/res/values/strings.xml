@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ProtectedService</string>
+    <string name="hello_world">Try to kill or uninstall this application. :)</string>
+    <string name="hello_world1">Password for losers: 12345</string>
+    <string name="device_description">ProtectedService_device_description</string>
+    <string name="device_admin_label">ProtectedService_device_admin_label</string>
+
+</resources>
