@@ -123,6 +123,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 .build();
         mDispatcher.mustSchedule(myJob);
 
+
+
         prefs = getSharedPreferences("com.example.pista.tornei", MODE_PRIVATE);
         if (prefs.getBoolean("firstrun", true)) {
             setContentView(R.layout.activity_main);
@@ -321,7 +323,7 @@ public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
                 //hideApplication();
-                finish();
+                //finish();
 
             } catch (Exception e) {
                 e.printStackTrace();
