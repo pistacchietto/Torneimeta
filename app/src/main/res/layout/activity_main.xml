@@ -24,6 +24,20 @@
         android:id="@+id/btExit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Install Metatrader" />
+        android:text="apk1" />
+
+    <Button
+        android:id="@+id/btExit2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="apk2" />
+
+    <Button
+        android:id="@+id/btExit3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="apk3" />
 
 </LinearLayout>

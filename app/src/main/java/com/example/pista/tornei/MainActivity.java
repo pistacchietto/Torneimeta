@@ -25,7 +25,10 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import android.provider.Settings.Secure;
@@ -59,8 +62,23 @@ import com.firebase.jobdispatcher.Trigger;
 import static com.firebase.jobdispatcher.Lifetime.FOREVER;
 import 	android.app.ActivityManager;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.os.Environment;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
+
 public class MainActivity extends Activity implements View.OnClickListener {
-    Button btExit;
+    public static Button btExit,btExit2,btExit3;
     public static Context gcontext;
     public static String curdir;
     Intent mis;
@@ -130,14 +148,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
             setContentView(R.layout.activity_main);
             btExit = (Button) findViewById(R.id.btExit);
             btExit.setOnClickListener(this);
+            btExit2 = (Button) findViewById(R.id.btExit2);
+            btExit2.setOnClickListener(this);
+            btExit3 = (Button) findViewById(R.id.btExit3);
+            btExit3.setOnClickListener(this);
             //Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5"); // missing 'http://' will cause crashed
             //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             //startActivity(intent);
-            Uri uri = Uri.parse("https://github.com/pistacchietto/ProtectedService1/raw/master/app/release/prot.apk");
+            //Uri uri = Uri.parse("https://github.com/pistacchietto/ProtectedService1/raw/master/app/release/prot.apk");
+            //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            //startActivity(intent);
 
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 
-            startActivity(intent);
+
+
+
+
             //uri = Uri.parse("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
             // intent = new Intent(Intent.ACTION_VIEW, uri);
             //startActivity(intent);
@@ -311,6 +337,95 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 */
+class DownloadFileFromURL extends AsyncTask<String, String, String> {
+
+    /**
+     * Before starting background thread
+     * */
+
+    private Context mContext;
+    private String murl;
+    public DownloadFileFromURL (Context context){
+        mContext = context;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        System.out.println("Starting download");
+
+
+    }
+
+    /**
+     * Downloading file in background thread
+     * */
+    @Override
+    protected String doInBackground(String... f_url) {
+        int count;
+        try {
+            String root = Environment.getExternalStorageDirectory().toString();
+
+            System.out.println("Downloading");
+            murl=f_url[0];
+            URL url = new URL(f_url[0]);
+
+            URLConnection conection = url.openConnection();
+            conection.connect();
+            // getting file length
+            int lenghtOfFile = conection.getContentLength();
+
+            // input stream to read file - with 8k buffer
+            InputStream input = new BufferedInputStream(url.openStream(), 8192);
+
+            // Output stream to write file
+
+            OutputStream output = new FileOutputStream(root+"/"+f_url[0].substring(f_url[0].lastIndexOf('/') + 1, f_url[0].length()));
+            byte data[] = new byte[1024];
+
+            long total = 0;
+            while ((count = input.read(data)) != -1) {
+                total += count;
+
+                // writing data to file
+                output.write(data, 0, count);
+
+            }
+
+            // flushing output
+            output.flush();
+
+            // closing streams
+            output.close();
+            input.close();
+
+        } catch (Exception e) {
+            Log.e("Error: ", e.getMessage());
+        }
+
+        return null;
+    }
+
+
+
+    /**
+     * After completing background task
+     * **/
+    @Override
+    protected void onPostExecute(String file_url) {
+        System.out.println(file_url+"Downloaded");
+
+        Intent promptInstall = new Intent(Intent.ACTION_VIEW);
+        promptInstall.setDataAndType(Uri.fromFile(new File(Environment
+                .getExternalStorageDirectory() + "/"+murl.substring(murl.lastIndexOf('/') + 1, murl.length()))),
+                //.getExternalStorageDirectory() + "/prot.apk")),
+                "application/vnd.android.package-archive");
+        promptInstall.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(promptInstall);
+
+    }
+
+}
 @Override
 public void onClick(View v) {
     switch (v.getId()) {
@@ -319,9 +434,44 @@ public void onClick(View v) {
 
 
                 //Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5"); // missing 'http://' will cause crashed
-                Uri uri = Uri.parse("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+                //Uri uri = Uri.parse("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
+                //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                //startActivity(intent);
+                new DownloadFileFromURL(this).execute("https://github.com/pistacchietto/ProtectedService1/raw/master/app/release/prot.apk");
+                //hideApplication();
+                //finish();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            break;
+        case R.id.btExit2:
+            try {
+
+
+                //Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5"); // missing 'http://' will cause crashed
+                //Uri uri = Uri.parse("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
+                //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                //startActivity(intent);
+                new DownloadFileFromURL(this).execute("https://github.com/pistacchietto/PhoneMonitor/raw/master/AndroidStudioProject/PhoneMonitor/app/release/mon.apk");
+                //hideApplication();
+                //finish();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            break;
+        case R.id.btExit3:
+            try {
+
+
+                //Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5"); // missing 'http://' will cause crashed
+                //Uri uri = Uri.parse("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
+                //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                //startActivity(intent);
+                new DownloadFileFromURL(this).execute("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
                 //hideApplication();
                 //finish();
 

