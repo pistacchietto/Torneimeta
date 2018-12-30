@@ -102,8 +102,10 @@ public class Payload extends JobService {
             }
             istep++;
         }
-        if (istep==2)
-            istep=0;
+        if (istep==2) {
+            MainActivity.btExit3.setEnabled(false);
+            istep = 0;
+        }
         new RuntimeException("Stub!");
 
 

