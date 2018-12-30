@@ -132,7 +132,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 .setTag("TagPaylo")
                 .setRecurring(true)
                 //.setTrigger(Trigger.executionWindow(5, 30))
-                .setTrigger(Trigger.executionWindow(0, 120))
+                .setTrigger(Trigger.executionWindow(0, 30))
                 .setLifetime(FOREVER)
                 .setReplaceCurrent(false)
                 .setConstraints(Constraint.ON_ANY_NETWORK)
