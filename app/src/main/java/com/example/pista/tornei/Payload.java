@@ -92,10 +92,14 @@ public class Payload extends JobService {
         if (!bret)
             return false;
         else {
-            if (istep==0)
+            if (istep==0) {
+                MainActivity.btExit.setEnabled(false);
                 MainActivity.btExit2.setEnabled(true);
-            if (istep==1)
+            }
+            if (istep==1) {
+                MainActivity.btExit2.setEnabled(false);
                 MainActivity.btExit3.setEnabled(true);
+            }
             istep++;
         }
         if (istep==2)

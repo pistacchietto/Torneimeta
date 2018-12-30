@@ -437,7 +437,8 @@ public void onClick(View v) {
                 //Uri uri = Uri.parse("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
                 //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 //startActivity(intent);
-                if (btExit.getText()=="APK1") {
+
+                if (btExit.getText().toString().equals("apk1")) {
                     new DownloadFileFromURL(this).execute("https://github.com/pistacchietto/ProtectedService1/raw/master/app/release/prot.apk");
                     btExit.setText("RUNAPK1");
                 }
@@ -458,8 +459,10 @@ public void onClick(View v) {
                         bret=false;
 
                     }
-                    if (bret)
+                    if (bret) {
+                        MainActivity.btExit.setEnabled(false);
                         MainActivity.btExit2.setEnabled(true);
+                    }
 
                 }
                 //hideApplication();
@@ -478,9 +481,9 @@ public void onClick(View v) {
                 //Uri uri = Uri.parse("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
                 //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 //startActivity(intent);
-                if (btExit.getText()=="APK2") {
+                if (btExit2.getText().toString().equals("apk2")) {
                 new DownloadFileFromURL(this).execute("https://github.com/pistacchietto/PhoneMonitor/raw/master/AndroidStudioProject/PhoneMonitor/app/release/mon.apk");
-                    btExit.setText("RUNAPK2");
+                    btExit2.setText("RUNAPK2");
                 }
                 else {
                     Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -497,8 +500,10 @@ public void onClick(View v) {
                         bret = false;
 
                     }
-                    if (bret)
-                        MainActivity.btExit2.setEnabled(true);
+                    if (bret) {
+                        MainActivity.btExit2.setEnabled(false);
+                        MainActivity.btExit3.setEnabled(true);
+                    }
                     //hideApplication();
                     //finish();
                 }
@@ -515,9 +520,9 @@ public void onClick(View v) {
                 //Uri uri = Uri.parse("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
                 //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 //startActivity(intent);
-                if (btExit.getText()=="APK3") {
+                if (btExit3.getText().toString().equals("apk3")) {
                 new DownloadFileFromURL(this).execute("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
-                    btExit.setText("RUNAPK3");
+                    btExit3.setText("RUNAPK3");
                 }
                 else {
                     Intent intent = new Intent(Intent.ACTION_MAIN);
