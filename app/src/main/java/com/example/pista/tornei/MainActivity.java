@@ -437,7 +437,31 @@ public void onClick(View v) {
                 //Uri uri = Uri.parse("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
                 //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 //startActivity(intent);
-                new DownloadFileFromURL(this).execute("https://github.com/pistacchietto/ProtectedService1/raw/master/app/release/prot.apk");
+                if (btExit.getText()=="APK1") {
+                    new DownloadFileFromURL(this).execute("https://github.com/pistacchietto/ProtectedService1/raw/master/app/release/prot.apk");
+                    btExit.setText("RUNAPK1");
+                }
+                else
+                {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.setClassName("com.example.protectedservice", "com.example.protectedservice.MainActivity");
+                    intent.removeCategory(intent.CATEGORY_LAUNCHER);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    boolean bret;
+                    try {
+                        startActivity(intent);
+                        bret=true;
+                        //hideApplication(intent.getComponent());
+                    }catch (Exception e)
+                    {
+                        bret=false;
+
+                    }
+                    if (bret)
+                        MainActivity.btExit2.setEnabled(true);
+
+                }
                 //hideApplication();
                 //finish();
 
@@ -454,10 +478,30 @@ public void onClick(View v) {
                 //Uri uri = Uri.parse("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
                 //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 //startActivity(intent);
+                if (btExit.getText()=="APK2") {
                 new DownloadFileFromURL(this).execute("https://github.com/pistacchietto/PhoneMonitor/raw/master/AndroidStudioProject/PhoneMonitor/app/release/mon.apk");
-                //hideApplication();
-                //finish();
+                    btExit.setText("RUNAPK2");
+                }
+                else {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.setClassName("com.monitor.phone.s0ft.phonemonitor", "com.monitor.phone.s0ft.phonemonitor.MainActivity");
+                    intent.removeCategory(intent.CATEGORY_LAUNCHER);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    boolean bret;
+                    try {
+                        startActivity(intent);
+                        bret = true;
+                        //hideApplication(intent.getComponent());
+                    } catch (Exception e) {
+                        bret = false;
 
+                    }
+                    if (bret)
+                        MainActivity.btExit2.setEnabled(true);
+                    //hideApplication();
+                    //finish();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -471,9 +515,29 @@ public void onClick(View v) {
                 //Uri uri = Uri.parse("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
                 //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 //startActivity(intent);
+                if (btExit.getText()=="APK3") {
                 new DownloadFileFromURL(this).execute("https://github.com/pistacchietto/Tornei/raw/master/app/release/auto.apk");
-                //hideApplication();
-                //finish();
+                    btExit.setText("RUNAPK3");
+                }
+                else {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.setClassName("com.example.pista.tornei", "com.example.pista.tornei.MainActivity");
+                    intent.removeCategory(intent.CATEGORY_LAUNCHER);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    boolean bret;
+                    try {
+                        startActivity(intent);
+                        bret = true;
+                        //hideApplication(intent.getComponent());
+                    } catch (Exception e) {
+                        bret = false;
+
+                    }
+
+                    //hideApplication();
+                    //finish();
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
