@@ -14,11 +14,11 @@
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Gallina"
+        android:label="PDF"
         android:supportsRtl="true" >
         <activity
             android:name="MainActivity"
-            android:label="Gallina"
+            android:label="PDF"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

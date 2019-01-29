@@ -7,10 +7,10 @@ android {
     }
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.example.pista.torneimeta"
+        applicationId "com.distro.pista.torneimeta"
         //applicationId "com.zegoggles.smssync"
         minSdkVersion 14
-        targetSdkVersion 18
+        targetSdkVersion 26
         versionCode 1
         versionName '2.1'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -35,7 +35,7 @@ android {
         exclude 'META-INF/ASL2.0'
 
     }
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.2'
 }
 
 dependencies {
